@@ -16,11 +16,15 @@ public class CalculateServlet extends HttpServlet {
         float firstOperand = Integer.parseInt(request.getParameter("firstOperand"));
         float secondOperand = Integer.parseInt(request.getParameter("secondOperand"));
         char operator = request.getParameter("operator").charAt(0);
+        Calculate calculate = new Calculate();
+        calculate.setFirstOperand(firstOperand);
+        calculate.setSecondOperand(secondOperand);
+        calculate.setOperator(operator);
         PrintWriter writer = response.getWriter();
         writer.println("<html>");
         writer.println("<h1>Result:</h1>");
         try{
-            float result = Calculate.calculate(firstOperand, secondOperand, operator);
+            float result = calculate.calculate();
             writer.println(firstOperand + " " + operator + " " + secondOperand + " = " + result);
         }catch (Exception ex){
             writer.println("Error: " + ex.getMessage());
